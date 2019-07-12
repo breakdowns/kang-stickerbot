@@ -269,10 +269,12 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
 
 
 kang_handler = CommandHandler('kang', kang, pass_args=True)
-dispatcher.add_handler(kang_handler)
-
 kangurl_handler = CommandHandler('kangurl', kangurl, pass_args=True)
+start_handler = CommandHandler('start', start)
+
+dispatcher.add_handler(kang_handler)
 dispatcher.add_handler(kangurl_handler)
+dispatcher.add_handler(start_handler)
 
 updater.start_polling(timeout=15, read_latency=4)
 updater.idle()
