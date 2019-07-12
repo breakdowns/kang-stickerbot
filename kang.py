@@ -14,22 +14,37 @@ from typing import Optional, List
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError
 from telegram import Update, Bot
-from telegram.ext import CommandHandler, run_async
+from telegram.ext import CommandHandler, run_async, Updater, Handler, InlineQueryHandler
 from telegram.utils.helpers import escape_markdown
 
-from telegram import Message, Chat, MessageEntity, TelegramObject, InlineQueryResultArticle, InputTextMessageContent
-from telegram.ext import Updater, MessageHandler, Filters, Handler, InlineQueryHandler
+from telegram import Message, Chat, MessageEntity, InlineQueryResultArticle
 from os import path
 
-logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 logger = logging.getLogger()
-logger.setLevel(logging.ERROR)
 
 if path.exists("config.py"):
     import config
 else:
     logger.error("config.py was not found")
     exit(-1)
+
+updater = telegram.ext.Updater(config.TOKEN)
+dispatcher = updater.dispatcher
+
+START_TEXT = """
+Hey! I'm {}, and I'm a bot which allows you to create a sticker pack from other stickers, images and documents!
+I only have a few commands so I don't have a help menu or anything like that.
+You can also check out the sourcecode for the bot [here](https://github.com/skittles9823/kangbot)
+""".format(dispatcher.bot.first_name)
+
+
+@run_async
+def start(bot: Bot, update: Update):
+    if update.effective_chat.type == "private":
+        update.effective_message.reply_text(START_TEXT, parse_mode=ParseMode.MARKDOWN)
+    else:
+        update.effective_message.reply_text("Time to make like HavocOS and KANG!")
 
 
 @run_async
@@ -252,9 +267,6 @@ def makepack_internal(msg, user, png_sticker, emoji, bot, packname, packnum):
     else:
         msg.reply_text("Failed to create sticker pack. Possibly due to blek mejik.")
 
-
-updater = telegram.ext.Updater(config.TOKEN)
-dispatcher = updater.dispatcher
 
 kang_handler = CommandHandler('kang', kang, pass_args=True)
 dispatcher.add_handler(kang_handler)
