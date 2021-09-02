@@ -30,7 +30,7 @@ def getConfig(name: str):
 try:
     TOKEN = getConfig('TOKEN')
 except KeyError as e:
-    LOGGER.error("TOKEN  env variables missing! Exiting now")
+    LOGGER.error("TOKEN env variables missing! Exiting now")
     exit(1)
 
 updater = telegram.ext.Updater(token=TOKEN)
