@@ -7,8 +7,8 @@
       "telegram",
       "python"
     ],
-    "repository": "https://github.com/SlamDevs",
-    "website": "https://github.com/SlamDevs",
+    "repository": "https://github.com/breakdowns",
+    "website": "https://github.com/breakdowns",
     "success_url": "https://t.me/SlamDevs",
     "stack": "container",
     "env": {
