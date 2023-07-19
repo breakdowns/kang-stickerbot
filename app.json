@@ -1,0 +1,26 @@
+{
+    "name": "kang-stickerbot",
+    "description": "A simple Telegram bot which creates sticker packs from other stickers, images, documents and URLs.",
+    "logo": "https://telegra.ph/file/6507910fd06d18dfaba82.jpg",
+    "keywords": [
+      "bot",
+      "telegram",
+      "python"
+    ],
+    "repository": "https://github.com/breakdowns",
+    "website": "https://github.com/breakdowns",
+    "success_url": "https://t.me/SlamDevs",
+    "stack": "container",
+    "env": {
+      "TOKEN": {
+        "description": "The Telegram bot token that you get from https://t.me/BotFather.",
+        "required": true
+      }
+    },
+    "formation": {
+            "worker": {
+                "quantity": 1,
+                "size": "free"
+            }
+      }
+}
